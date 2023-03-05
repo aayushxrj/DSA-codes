@@ -1,5 +1,7 @@
+//static array implementation of stack
 #include<stdio.h>
 #include<stdlib.h>
+#define MAX 10;
 
 struct stack{
     int size;
@@ -48,17 +50,29 @@ int pop(struct stack *ptr){
     }
 }
 
-int peek(struct stack *ptr,int posn){
+//modified peek for giving posn element
+// int peek(struct stack *ptr,int posn){
+//     if(isEmpty(ptr)){
+//         printf("Stack is empty.");
+//         return -1;
+//     }
+//     else if(posn<0 || posn>ptr->top+1){
+//         printf("Not a valid position");
+//         return -1;
+//     }
+//     else{
+//         return ptr->arr[ptr->top-posn+1];
+//     }
+// }
+
+//normal peek
+int peek(struct stack *ptr){
     if(isEmpty(ptr)){
         printf("Stack is empty.");
         return -1;
     }
-    else if(posn<0 || posn>ptr->top+1){
-        printf("Not a valid position");
-        return -1;
-    }
     else{
-        return ptr->arr[ptr->top-posn+1];
+        return ptr->arr[ptr->top];
     }
 }
 
@@ -75,7 +89,7 @@ int main(){
     // s->arr = (int*)malloc(s->size*sizeof(int));
 
     struct stack *s =(struct stack*)malloc(sizeof(struct stack));
-    s->size = 10;
+    s->size = MAX;
     s->top = -1;
     s->arr = (int*)malloc(s->size*sizeof(int));
     printf("Stack created!\n");
