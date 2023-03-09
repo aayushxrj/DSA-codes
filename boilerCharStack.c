@@ -58,38 +58,6 @@ char peek(struct stack *ptr){
     }
 }
 
-int priority (char val){
-    if (val == '('){
-        return 5;
-    }
-    else if(val == '/' ){
-        return 4;
-    }
-    else if (val == '*' ){
-        return 3;
-    }
-    else if(val == '+'){
-        return 2;
-    }    
-    else if(val == '-'){
-        return 1;
-    }
-    else{
-        return -1;
-    }
-}
-
-char InToPost(struct stack *ptr, char arr[]){
-    for (int i =0; arr[i]!= '\0'; i++) {
-        if(arr[i] !='(' || arr[i] != '/' || arr[i] != '*'|| arr[i] != '+' || arr[i] != '-'){
-            //logic correct?
-            printf("%c",arr[i]);
-        }
-        else{
-            //logic
-        }                
-    }
-}
 
 
 int main(){
@@ -98,8 +66,7 @@ int main(){
     s->top = -1;
     s->arr = (char*)malloc(s->size*sizeof(char));
 
-    char exp[] ="A*(B+C)";
-    InToPost(s,exp);
+
 
 
     return 0;

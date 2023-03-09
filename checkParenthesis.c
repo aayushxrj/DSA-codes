@@ -29,7 +29,7 @@ int isFull(struct stack *ptr){
 void push(struct stack *ptr,char val){
     if(isFull(ptr)){
         printf("Stack overflow.\n");
-        printf("Cannot push %d to the stack!",val);
+        printf("Cannot push %c to the stack!\n",val);
     }
     else{
         ptr->top++;
@@ -37,19 +37,19 @@ void push(struct stack *ptr,char val){
     }
 }
 
-int pop(struct stack *ptr){
+char pop(struct stack *ptr){
     if(isEmpty(ptr)){
-        printf("Stack underflow.");
+        printf("Stack underflow.\n");
         return -1;
     }
     else{
-        int val = ptr->arr[ptr->top];
+        char val = ptr->arr[ptr->top];
         ptr->top--;
         return val;
     }
 }
 
-int peek(struct stack *ptr){
+char peek(struct stack *ptr){
     if(isEmpty(ptr)){
         printf("Stack is empty.");
         return -1;
@@ -61,14 +61,8 @@ int peek(struct stack *ptr){
 
 
 bool check(char arr[],struct stack *ptr){
-    for(int i =0;i!='\0';i++){
-        if(arr[i]=='{'){
-            push(ptr,arr[i]);
-        }
-        else if(arr[i]=='('){
-            push(ptr,arr[i]);
-        }
-        else if(arr[i]=='['){
+    for(int i =0; arr[i]!='\0'; i++){
+        if(arr[i]=='{' || arr[i] == '(' || arr[i] == '['){
             push(ptr,arr[i]);
         }
         else if(arr[i]==']'){
@@ -95,8 +89,12 @@ bool check(char arr[],struct stack *ptr){
                 return false;
             }
         }
-        return true; 
-
+    }
+    if(isEmpty(ptr)){
+        return true;
+    }
+    else{
+        return false;
     }
 }
 
@@ -106,15 +104,10 @@ int main(){
     s->size = 100;
     s->top = -1;
     s->arr = (char*)malloc(s->size*sizeof(char));
-    printf("Stack created!\n");
 
-    char exp[] ="{[(]}";
-    for(int i =0; i!='\0';i++){
-        push(s,exp[i]);
-    }
-    
+    char exp[] ="{[()]}";
 
-    if(check(exp,s)==true){
+    if(check(exp,s)){
         printf("Valid");
     }
     else{
