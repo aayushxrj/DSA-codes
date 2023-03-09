@@ -1,8 +1,15 @@
 #include<stdio.h>
 
-int main(){
-    int arr[10];
-    for(int i = 0; i<10;i++){
-        printf("%d\n",arr[i]);
+
+char display(char arr[]){
+    for (int i =0; arr[i]!= '\0'; i++) {
+        if(arr[i] != '/' && arr[i] != '*'&& arr[i] != '+' && arr[i] != '-'){
+            printf("%c",arr[i]);
+        }           
     }
+}
+int main(){
+    char arr[] = "A*(B+C)";
+    display(arr);
+
 }

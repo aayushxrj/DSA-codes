@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 struct stack{
     int size;
@@ -79,16 +80,40 @@ int priority (char val){
     }
 }
 
-char InToPost(struct stack *ptr, char arr[]){
-    for (int i =0; arr[i]!= '\0'; i++) {
-        if(arr[i] !='(' || arr[i] != '/' || arr[i] != '*'|| arr[i] != '+' || arr[i] != '-'){
-            //logic correct?
-            printf("%c",arr[i]);
+char *InToPost(struct stack *ptr, char exp[]){
+    char *postfix = (char*)malloc(strlen(exp)*sizeof(char)); 
+    int j = 0;
+    for (int i =0; exp[i]!= '\0'; i++) {
+        if(exp[i] != '/' && exp[i] != '*'&& exp[i] != '+' && exp[i] != '-'){
+            // printf("%c",exp[i]);
+            postfix[j] = exp[i];
+            j++;
         }
         else{
-            //logic
+            //logic 
+            if(isEmpty(ptr)){
+                push(ptr,exp[i]);
+            }
+            else{
+                if(priority(ptr->arr[ptr->top])>=priority(exp[i])){
+                    // pop(ptr);
+                    postfix[j] = pop(ptr);
+                    j++;
+                    push(ptr,exp[i]);
+                }
+                else{
+                    push(ptr,exp[i]);
+                }
+            }
         }                
     }
+    for(int k = ptr->top;k>=0;k--){
+        postfix[j] = pop(ptr);
+        j++;
+    }
+
+    postfix[j] = '\0';
+    return postfix;
 }
 
 
@@ -98,9 +123,9 @@ int main(){
     s->top = -1;
     s->arr = (char*)malloc(s->size*sizeof(char));
 
-    char exp[] ="A*(B+C)";
-    InToPost(s,exp);
-
+    char exp[] ="A*B+C";
+    printf("Infix Expression : %s\n", exp);
+    printf("Postfix Expression : %s",InToPost(s,exp));
 
     return 0;
 }
