@@ -40,7 +40,7 @@ void push(struct stack *ptr,char val){
 char pop(struct stack *ptr){
     if(isEmpty(ptr)){
         printf("Stack underflow.\n");
-        return -1;
+        return '\0';
     }
     else{
         char val = ptr->arr[ptr->top];
@@ -52,7 +52,7 @@ char pop(struct stack *ptr){
 char peek(struct stack *ptr){
     if(isEmpty(ptr)){
         printf("Stack is empty.");
-        return -1;
+        return '\0';
     }
     else{
         return ptr->arr[ptr->top];
