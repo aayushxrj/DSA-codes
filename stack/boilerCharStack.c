@@ -58,15 +58,23 @@ char peek(struct stack *ptr){
     }
 }
 
+struct stack *createStack(int size){
+    struct stack *S =(struct stack*)malloc(sizeof(struct stack));
+    S->size = size;
+    S->top = -1;
+    S->arr = (char*)malloc(S->size*sizeof(char));
+    return S;
+}
 
 
 int main(){
-    struct stack *s =(struct stack*)malloc(sizeof(struct stack));
-    s->size = 100;
-    s->top = -1;
-    s->arr = (char*)malloc(s->size*sizeof(char));
-
-
+    // struct stack *s =(struct stack*)malloc(sizeof(struct stack));
+    // s->size = 100;
+    // s->top = -1;
+    // s->arr = (char*)malloc(s->size*sizeof(char));
+    struct stack *stk = createStack(100);
+    printf("Stack created\n");
+ 
 
 
     return 0;
