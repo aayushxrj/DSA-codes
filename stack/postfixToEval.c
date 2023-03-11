@@ -69,8 +69,8 @@ struct stack *createStack(int size){
 char *postfixToEval(char exp[]){
     struct stack *stk = createStack(100);
     for(int i = 0; exp[i]!='\0'; i++){
-        //logic
-        
+        //logic  
+                        
     }
 }
 
@@ -80,8 +80,5 @@ int main(){
     char exp[] = "123*+5-";
     printf("Postfix Expression : %s\n", exp);
     printf("Infix Expression : %s",postfixToEval(exp));
-
-
-
     return 0;
 }

@@ -80,6 +80,17 @@ int priority (char val){
     }
 }
 
+//error is here too shayad
+/*The issue seems to be with the InToPost function. When converting the infix expression to postfix, 
+the operands are added to the postfix expression directly, but the operators are added to the stack. 
+When an operator with lower priority than the top of the stack is encountered, 
+the operators in the stack are popped and added to the postfix expression until an operator with lower or equal priority is found, 
+and then the new operator is pushed onto the stack.
+In the InToPost function, the condition for popping operators from the stack and adding them to the postfix expression is incorrect. 
+Instead of popping operators until an operator with lower or equal priority is found, 
+the function is currently popping all operators until an opening bracket is found. 
+This results in the wrong postfix expression being generated.*/
+
 char *InToPost(struct stack *ptr, char exp[]){
     char *postfix = (char*)malloc(strlen(exp)*sizeof(char)); 
     int j = 0;
@@ -104,7 +115,7 @@ char *InToPost(struct stack *ptr, char exp[]){
                 push(ptr,exp[i]);
             }
             else{
-                if(priority(ptr->arr[ptr->top])>=priority(exp[i])){
+                if(priority(ptr->arr[ptr->top])>priority(exp[i])){
                     postfix[j] = pop(ptr);
                     j++;
                     push(ptr,exp[i]);

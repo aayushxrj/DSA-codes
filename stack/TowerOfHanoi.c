@@ -12,5 +12,6 @@ The puzzle has the following two rules:
 #include<stdio.h>
 
 int main(){
+
     return 0;
 }

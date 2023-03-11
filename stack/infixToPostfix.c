@@ -95,7 +95,7 @@ char *InToPost(struct stack *ptr, char exp[]){
                 push(ptr,exp[i]);
             }
             else{
-                if(priority(ptr->arr[ptr->top])>=priority(exp[i])){
+                if(priority(ptr->arr[ptr->top])>priority(exp[i])){
                     // pop(ptr);
                     postfix[j] = pop(ptr);
                     j++;

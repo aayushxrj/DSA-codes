@@ -93,9 +93,19 @@ char *InToPost(char exp[]){
     char *postfix = (char*)malloc(strlen(exp)*sizeof(char)); 
     int j = 0;
     for (int i =0; exp[i]!= '\0'; i++) {
-        if(exp[i] != '/' && exp[i] != '*'&& exp[i] != '+' && exp[i] != '-'){
+        if(exp[i] != '(' && exp[i] != '/' && exp[i] != '*'&& exp[i] != '+' && exp[i] != '-'){
             postfix[j] = exp[i];
             j++;
+        }
+        else if(exp[i] == '('){
+            push(ptr,exp[i]);
+        }
+        else if(exp[i] == ')'){
+            for(int k = ptr->top;ptr->arr[k] != '(';k--){
+                postfix[j] = pop(ptr);
+                j++;
+            }
+            pop(ptr); 
         }
         else{
             //logic 
@@ -121,6 +131,9 @@ char *InToPost(char exp[]){
     postfix[j] = '\0';
     return postfix;
 }
+
+//-------------------------------------error is here or in postfix conversion code-----------------------------------------------------//
+
 char *infixToPrefix(char exp[]){
     struct stack *stk = createStack(100);
     char *prefix = (char*)malloc(strlen(exp)*sizeof(char));
@@ -128,43 +141,47 @@ char *infixToPrefix(char exp[]){
     char *postfix = (char*)malloc(strlen(exp)*sizeof(char));
     int j =0;
 
-    //reversing it
+    //reversing it & changing '(' to ')' and vice versa
     for(int i = 0; exp[i]!='\0'; i++){
         push(stk,exp[i]);        
     }
     for(int i = 0; i<strlen(exp); i++,j++){
-        rev[j] = pop(stk);        
+        char c = pop(stk);
+        if(c == '('){
+        rev[j] = ')';
+        }
+        else if(c == ')'){
+            rev[j] = '(';            
+        }
+        else{
+            rev[j] = c; 
+        }             
     }
     rev[j] = '\0';
     //now postfix convert
     postfix = InToPost(rev);
 
     //now rev again
-    for(int i = 0; exp[i]!='\0'; i++){
+    for(int i = 0; postfix[i]!='\0'; i++){
         push(stk,postfix[i]);        
     }
     j = 0;
-    for(int i = 0; i<strlen(exp); i++,j++){
+    for(int i = 0; i<strlen(postfix); i++,j++){
         prefix[j] = pop(stk);        
     }
     prefix[j] = '\0';   
-    free(rev);free(stk);free(postfix);
     return prefix;
 }
 
 
 int main(){
-    char exp[] = "A*B+C/D";
+    char exp[] = "(A-B/C)*(A/K-L)";
     printf("Infix Expression : %s\n", exp);
-    printf("Prefix Expression : %s",infixToPrefix(exp)); //      +*AB/CD
+    printf("Prefix Expression : %s",infixToPrefix(exp)); //      *-A/BC-/AKL
     return 0;
 }
 
-// test case 2
-/* 
-    Input : (A - B/C) * (A/K-L)
-    Output : *-A/BC-/AKL 
-*/
+
 /*
 To convert an infix to postfix expression refer to this article Stack | Set 2 (Infix to Postfix). We use the same to convert Infix to Prefix.
 Step 1: Reverse the infix expression i.e A+B*C will become C*B+A. Note while reversing each ‘(‘ will become ‘)’ and each ‘)’ becomes ‘(‘.
