@@ -132,7 +132,7 @@ char *InToPost(char exp[]){
     return postfix;
 }
 
-//-------------------------------------error is here or in postfix conversion code-----------------------------------------------------//
+//------------------------------------error is here or in postfix conversion code-----------------------------------------------------//
 
 char *infixToPrefix(char exp[]){
     struct stack *stk = createStack(100);

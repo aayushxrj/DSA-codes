@@ -80,7 +80,7 @@ int priority (char val){
     }
 }
 
-//error is here too shayad
+//error is here too shayad 
 /*The issue seems to be with the InToPost function. When converting the infix expression to postfix, 
 the operands are added to the postfix expression directly, but the operators are added to the stack. 
 When an operator with lower priority than the top of the stack is encountered, 

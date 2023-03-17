@@ -1,15 +1,21 @@
 #include<stdio.h>
 
+// char display(char arr[]){
+//     for (int i =0; arr[i]!= '\0'; i++) {
+//         if(arr[i] != '/' && arr[i] != '*'&& arr[i] != '+' && arr[i] != '-'){
+//             printf("%c",arr[i]);
+//         }           
+//     }
+// }
+// int main(){
+//     char arr[] = "A*(B+C)";
+//     display(arr);
 
-char display(char arr[]){
-    for (int i =0; arr[i]!= '\0'; i++) {
-        if(arr[i] != '/' && arr[i] != '*'&& arr[i] != '+' && arr[i] != '-'){
-            printf("%c",arr[i]);
-        }           
-    }
+// }
+int f1(int a, int b){
+    return (a>b?a:b);
+
 }
 int main(){
-    char arr[] = "A*(B+C)";
-    display(arr);
-
+    f1(10,9);
 }

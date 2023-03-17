@@ -66,19 +66,50 @@ struct stack *createStack(int size){
     return S;
 }
 
-char *postfixToEval(char exp[]){
+int calc(int val1, int val2, char opr){
+    if(opr == '/'){
+        return val1/val2;
+    }
+    else if(opr == '*'){
+        return val1*val2;
+    }
+    else if(opr == '+'){
+        return val1+val2;
+    }
+    else if(opr == '-'){
+        return val1-val2;
+    }
+    else{
+        return -1;
+    }
+}
+
+int postfixToEval(char exp[]){
     struct stack *stk = createStack(100);
     for(int i = 0; exp[i]!='\0'; i++){
-        //logic  
-                        
+        //logic 
+        if(exp[i] != '/' && exp[i] != '*' && exp[i] != '+' && exp[i] != '-'){
+            push(stk,exp[i]);
+        }
+        else{
+            int val1 = pop(stk)-'0';
+            int val2 = pop(stk)-'0';
+            int result = calc(val1, val2, exp[i]);
+            char res = result+'0';
+            push(stk, res); 
+        }
     }
+    int final = peek(stk)-'0';
+    return final; 
 }
 
 
 
 int main(){
-    char exp[] = "123*+5-";
+    char exp[] = "25+3*"; //21
     printf("Postfix Expression : %s\n", exp);
-    printf("Infix Expression : %s",postfixToEval(exp));
+    printf("Evaluation : %d",postfixToEval(exp));
     return 0;
 }
+
+
