@@ -12,10 +12,23 @@
 //     display(arr);
 
 // }
-int f1(int a, int b){
-    return (a>b?a:b);
+// int f1(int a, int b){
+//     return (a>b?a:b);
+
+// }
+int square(int *x){ // *(&x) = x
+    *x = *x*(*x);
+    return *x;
 
 }
 int main(){
-    f1(10,9);
-}
+    // int age = 20; // age = 2000
+    // int *ptr; // * = value at address  // & = address of
+    // ptr = &age;
+    // printf("%d",*ptr);
+    // printf("%d",age) ; 
+    int x = 10;
+    printf("%d\n",x);
+    printf("%d\n",square(&x));
+    printf("%d\n",x);
+    }
