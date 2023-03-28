@@ -31,16 +31,19 @@ Repeat steps 3-6 until the element is found or it is clear that the element is n
 
 // RECURSIVE METHOD
 int binarysearch(int arr[], int low,int high, int key){
-    int mid = (high+low)/2;
-    if(arr[mid] == key){
-        return mid;
+    while(low<=high){
+        int mid = (high+low)/2;
+        if(arr[mid] == key){
+            return mid;
+        }
+        else if(arr[mid]<key){
+            return binarysearch(arr,mid+1,high,key);
+        }
+        else{
+            return binarysearch(arr,low,mid-1,key);
+        }
     }
-    else if(arr[mid]<key){
-        return binarysearch(arr,mid+1,high,key);
-    }
-    else{
-        return binarysearch(arr,low,mid-1,key);
-    }
+    return -1;
 }
 
 int main(){

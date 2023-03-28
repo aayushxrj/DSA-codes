@@ -26,7 +26,7 @@ int isFull(Queue *ptr){
 }
 
 int isEmpty(Queue *ptr){
-    if(ptr->f > ptr->r){
+    if(ptr->f == -1){
         return 1;
     }
     else{
@@ -54,7 +54,12 @@ int dequeue(Queue *ptr){
     }
     else{
         int val = ptr->arr[ptr->f];
-        ptr->f = (ptr->f+1)%ptr->size;
+        if(ptr->f == ptr->r){
+            ptr->f = ptr->r = -1;           
+        }
+        else{
+            ptr->f = (ptr->f+1)%ptr->size;
+        }        
         return val;
     }
 }
@@ -68,5 +73,6 @@ void display(Queue *ptr){
 int main(){
     Queue *q = createQueue(100);
     printf("Circular Queue created.\n");
+
     return 0;
 }

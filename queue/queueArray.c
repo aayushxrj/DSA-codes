@@ -24,7 +24,7 @@ int isFull(struct queue *ptr){
         return 0;
     }
 }
-
+//wrong
 int isEmpty(struct queue *ptr){
     if(ptr->f == -1 || ptr->f > ptr->r){
     // if(ptr->f == ptr->r ){
@@ -47,7 +47,7 @@ void enqueue(struct queue *ptr, int val){
         }
     }
 }
-
+//wrong
 int dequeue(struct queue *ptr){
     if(isEmpty(ptr)){
         printf("No element to dequeue.\n");
