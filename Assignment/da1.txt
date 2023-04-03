@@ -1,0 +1,46 @@
+Q. An Italian Cafe offers red sauce and white sauce pasta to its customers, referred to by
+numbers 0 and 1 respectively. All the customers stand in a queue. Each customer either prefers
+red sauce or white sauce pasta.
+
+The number of pasta dishes in the cafe is equal to the number of customers. The pastas are
+placed in a stack. At each step:
+If the customer at the front of the queue prefers the pasta on the top of the stack, he/she will
+take it and leave the queue. Otherwise, he/she will leave it and go to the queue's end. This
+continues until none of the customer wants to take the top pasta and are thus unable to eat.
+
+You are given two integer arrays customers and pastas where pastas[i] is the type of the ith
+pasta in the stack and customers[j] is the preference of the jth customer in the initial queue. You
+are required to return the number of customers that are unable to eat.
+
+
+Example 1:
+
+Input: customers = [1,1,0,0], pastas = [0,1,0,1]
+Output: 0
+
+Explanation:
+• Front customer leaves the top pasta and returns to the end of the line making customers =
+[1,0,0,1].
+• Front customer leaves the top pasta and returns to the end of the line making customers =
+[0,0,1,1].
+• Front customer takes the top pasta and leaves the line making customers = [0,1,1] and pastas
+= [1,0,1].
+• Front customer leaves the top pasta and returns to the end of the line making customers =
+[1,1,0].
+• Front customer takes the top pasta and leaves the line making customers = [1,0] and pastas
+= [0,1].
+• Front customer leaves the top pasta and returns to the end of the line making customers =
+[0,1].
+• Front customer takes the top pasta and leaves the line making customers = [1] and pastas =
+[1].
+• Front customer takes the top pasta and leaves the line making customers = [] and pastas =
+[].
+Hence all customers are able to eat.
+
+
+Example 2:
+
+Input: customers = [1,1,1,0,0,1], pastas = [1,0,0,0,1,1]
+Output: 3
+
+Analyze the time and space complexity of your program.
