@@ -15,7 +15,7 @@ Stack *createStack(int size){
     return S;
 }
 
-int isEmpty(Stack *ptr){
+int isEmptyS(Stack *ptr){
     if(ptr->top == -1){
         return 1;
     }
@@ -24,7 +24,7 @@ int isEmpty(Stack *ptr){
     }
 }
 
-int isFull(Stack *ptr){
+int isFullS(Stack *ptr){
     if(ptr->top == ptr->size-1){
         return 1;
     }
@@ -34,7 +34,7 @@ int isFull(Stack *ptr){
 }
 
 void push(Stack *ptr,int val){
-    if(isFull(ptr)){
+    if(isFullS(ptr)){
         printf("Stack overflow.\n");
     }
     else{
@@ -44,7 +44,7 @@ void push(Stack *ptr,int val){
 }
 
 int pop(Stack *ptr){
-    if(isEmpty(ptr)){
+    if(isEmptyS(ptr)){
         printf("Stack underflow.");
         return -1;
     }
@@ -55,6 +55,15 @@ int pop(Stack *ptr){
     }
 }
 
+int peekS(Stack *ptr){
+    if(isEmptyS(ptr)){
+        printf("Stack is empty.");
+        return -1;
+    }
+    else{
+        return ptr->arr[ptr->top];
+    }
+}
 
 typedef struct circularQueue{
     int f;
@@ -71,7 +80,7 @@ Queue *createQueue(int size){
     return Q;
 }
 
-int isFull(Queue *ptr){
+int isFullQ(Queue *ptr){
     if((ptr->r+1)%ptr->size == ptr->f){
         return 1;
     }
@@ -80,7 +89,7 @@ int isFull(Queue *ptr){
     }
 }
 
-int isEmpty(Queue *ptr){
+int isEmptyQ(Queue *ptr){
     if(ptr->f == -1){
         return 1;
     }
@@ -90,7 +99,7 @@ int isEmpty(Queue *ptr){
 }
 
 void enqueue(Queue *ptr, int val){
-    if(isFull(ptr)){
+    if(isFullQ(ptr)){
         printf("Queue overflow.\n");
     }
     else{
@@ -103,7 +112,7 @@ void enqueue(Queue *ptr, int val){
 }
 
 int dequeue(Queue *ptr){
-    if(isEmpty(ptr)){
+    if(isEmptyQ(ptr)){
         printf("No element to dequeue.\n");
         return -1;
     }
@@ -119,24 +128,68 @@ int dequeue(Queue *ptr){
     }
 }
 
+void specialDequeue(Queue *ptr){
+    //logic ?? dequeues element from front and adds at back
+    if(isEmptyQ(ptr)){
+        printf("No element to dequeue.\n");
+    }
+    else{
+        enqueue(ptr,dequeue(ptr));
+    }
+}
 
+int peekQ(Queue *ptr){
+    if(isEmptyQ(ptr)){
+        printf("Queue is empty.");
+        return -1;
+    }
+    else{
+        int val = ptr->arr[ptr->f];
+        return val;
+    }
+}
 
-
+int condition(Queue *ptr1, Stack *ptr2){
+    if(peekS(ptr2) == 1){
+        while(/*queue is empty*/!isEmptyQ(ptr1)){
+            if(dequeue(ptr1) == 1){
+                return 0;
+            }
+        }
+        return 1;
+    }
+    else{
+        while(/*queue is empty*/!isEmptyQ(ptr1)){
+            if(dequeue(ptr1) == 0){
+                return 0;
+            }
+        }
+        return 1;
+    }
+}
 
 int result(int n, int *C, int *P){
-    int count = 0;
+    int count = n;
     Queue *customers = createQueue(n);
     Stack *pastas  = createStack(n);
     for(int i =0; i<n; i++){
         enqueue(customers,C[i]);
     }
-    for(int i =n-1; i>=0; i++){
+    for(int i =n-1; i>=0; i--){
         push(pastas,P[i]);
     }
 
-    // now logic??
-    
-
+    // error in special case
+    while(!isEmptyQ(customers) || !condition(customers,pastas)){
+        if(peekQ(customers) == peekS(pastas)){
+            dequeue(customers);
+            pop(pastas);
+            count--;
+        }
+        else{
+            specialDequeue(customers);
+        }
+    }
 
     return count;
 }
