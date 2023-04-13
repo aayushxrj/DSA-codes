@@ -11,40 +11,40 @@ Repeat steps 3-6 until the element is found or it is clear that the element is n
 #include<stdio.h>
 
 // ITERATIVE METHOD
-// int binarysearch(int arr[], int size, int key){
-//     //after sorting
-//     int low = 0, high =size-1;
-//     while(low<=high){
-//         int mid = (low+high)/2;
-//         if(arr[mid]==key){
-//             return mid;
-//         } 
-//         else if(key>arr[mid]){
-//             low = mid+1;
-//         }
-//         else{
-//             high = mid-1;
-//         }
-//     }
-//     return -1;
-// }
-
-// RECURSIVE METHOD
-int binarysearch(int arr[], int low,int high, int key){
+int binarysearch(int arr[], int size, int key){
+    //after sorting
+    int low = 0, high =size-1;
     while(low<=high){
-        int mid = (high+low)/2;
-        if(arr[mid] == key){
+        int mid = (low+high)/2;
+        if(arr[mid]==key){
             return mid;
-        }
-        else if(arr[mid]<key){
-            return binarysearch(arr,mid+1,high,key);
+        } 
+        else if(key>arr[mid]){
+            low = mid+1;
         }
         else{
-            return binarysearch(arr,low,mid-1,key);
+            high = mid-1;
         }
     }
     return -1;
 }
+
+// RECURSIVE METHOD
+// int binarysearch(int arr[], int low,int high, int key){
+//     while(low<=high){
+//         int mid = (high+low)/2;
+//         if(arr[mid] == key){
+//             return mid;
+//         }
+//         else if(arr[mid]<key){
+//             return binarysearch(arr,mid+1,high,key);
+//         }
+//         else{
+//             return binarysearch(arr,low,mid-1,key);
+//         }
+//     }
+//     return -1;
+// }
 
 int main(){
     int n;

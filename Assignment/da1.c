@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef struct stack{
+typedef struct stack{                        //Defining the structure of stack and all its operation as functions
     int top;
     int size;
     int *arr;
@@ -65,14 +65,14 @@ int peekS(Stack *ptr){
     }
 }
 
-typedef struct circularQueue{
+typedef struct queue{           //Defining the structure of queue and all its operation as functions
     int f;
     int r;
     int size;
     int *arr;
 } Queue;
 
-Queue *createQueue(int size){
+Queue *createQueue(int size) {
     Queue *Q = (Queue*)malloc(sizeof(Queue));
     Q->size = size;
     Q->f = Q->r = -1;
@@ -80,63 +80,48 @@ Queue *createQueue(int size){
     return Q;
 }
 
-int isFullQ(Queue *ptr){
-    if((ptr->r+1)%ptr->size == ptr->f){
+int isFullQ(Queue *ptr) {
+    if (ptr->r == ptr->size - 1) {
         return 1;
-    }
-    else{
+    } else {
         return 0;
     }
 }
 
-int isEmptyQ(Queue *ptr){
-    if(ptr->f == -1){
+int isEmptyQ(Queue *ptr) {
+    if (ptr->f == -1 || ptr->f > ptr->r) { 
         return 1;
-    }
-    else{
+    } else {
         return 0;
     }
 }
 
-void enqueue(Queue *ptr, int val){
-    if(isFullQ(ptr)){
-        printf("Queue overflow.\n");
-    }
-    else{
-        ptr->r = (ptr->r+1)%ptr->size;
+void enqueue(Queue *ptr, int val) {
+    if (isFullQ(ptr)) {
+        printf("Queue Overflow.\n");
+    } else {
+        ptr->r++;
         ptr->arr[ptr->r] = val;
-        if(ptr->f == -1){
+        if (ptr->f == -1) {
             ptr->f = 0;
         }
     }
 }
 
-int dequeue(Queue *ptr){
-    if(isEmptyQ(ptr)){
+int dequeue(Queue *ptr) {
+    if (isEmptyQ(ptr)) {
         printf("No element to dequeue.\n");
         return -1;
-    }
-    else{
+    } else {
         int val = ptr->arr[ptr->f];
-        if(ptr->f == ptr->r){
-            ptr->f = ptr->r = -1;           
+        ptr->f++;
+        if (ptr->f > ptr->r) { 
+            ptr->f = ptr->r = -1;
         }
-        else{
-            ptr->f = (ptr->f+1)%ptr->size;
-        }        
         return val;
     }
 }
 
-void specialDequeue(Queue *ptr){
-    //logic ?? dequeues element from front and adds at back
-    if(isEmptyQ(ptr)){
-        printf("No element to dequeue.\n");
-    }
-    else{
-        enqueue(ptr,dequeue(ptr));
-    }
-}
 
 int peekQ(Queue *ptr){
     if(isEmptyQ(ptr)){
@@ -148,10 +133,16 @@ int peekQ(Queue *ptr){
         return val;
     }
 }
+/*This function peeks the stack and checks 
+if same element is present in the queue 
+returns False if present else True*/
 
-int condition(Queue *ptr1, Stack *ptr2){
-    if(peekS(ptr2) == 1){
-        while(/*queue is empty*/!isEmptyQ(ptr1)){
+int condition(Queue *ptr1, Stack *ptr2){     
+    if(isEmptyS(ptr2)){                                       
+        return 1;                         
+    }
+    else if(peekS(ptr2) == 1){
+        while(!isEmptyQ(ptr1)){           //Dequeuing till the queue is empty
             if(dequeue(ptr1) == 1){
                 return 0;
             }
@@ -159,7 +150,7 @@ int condition(Queue *ptr1, Stack *ptr2){
         return 1;
     }
     else{
-        while(/*queue is empty*/!isEmptyQ(ptr1)){
+        while(!isEmptyQ(ptr1)){           //Dequeuing till the queue is empty
             if(dequeue(ptr1) == 0){
                 return 0;
             }
@@ -168,37 +159,35 @@ int condition(Queue *ptr1, Stack *ptr2){
     }
 }
 
-int result(int n, int *C, int *P){
+int result(int n, int *C, int *P){              //Function returns the number of customers that are unable to eat.
     int count = n;
-    Queue *customers = createQueue(n);
+    Queue *customers = createQueue(n);         //Stack & Queue created
     Stack *pastas  = createStack(n);
-    for(int i =0; i<n; i++){
+    for(int i =0; i<n; i++){                   //unpacking the arrays into the stack and queue
         enqueue(customers,C[i]);
     }
     for(int i =n-1; i>=0; i--){
         push(pastas,P[i]);
     }
 
-    // error in special case
-    while(!isEmptyQ(customers) || !condition(customers,pastas)){
-        if(peekQ(customers) == peekS(pastas)){
+    while(!isEmptyQ(customers) || !condition(customers,pastas)){ 
+        if(peekQ(customers) == peekS(pastas)){          // if both peeks return same value then we dequeue and pop simultaneously
             dequeue(customers);
             pop(pastas);
             count--;
         }
         else{
-            specialDequeue(customers);
+            enqueue(customers,dequeue(customers));               //dequeuing the customer from front and enqueuing it at back
         }
     }
-
     return count;
 }
 
 int main(){
-    int n;
+    int n;                        //taking number of customers as input
     scanf("%d",&n);
     int C[n], P[n];
-    for(int i =0; i<n; i++){
+    for(int i =0; i<n; i++){      //Storing the customers and pastas in arrays
         scanf("%d",&C[i]);
     }
     for(int i =0; i<n; i++){
