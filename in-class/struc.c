@@ -10,4 +10,5 @@ int main(){
     printf("%d\n", sizeof(r));
     printf("%d\n", sizeof(s));
     return 0;
+    
 }
