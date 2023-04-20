@@ -14,7 +14,7 @@ void countSort(int *A, int n){
     int max;
     int *count;
     max = findMax(A,n);
-    count = (int*)malloc(sizeof(max+1));
+    count = (int*)malloc(sizeof(int)*(max+1));
     for(int i =0; i<=max;i++){
         count[i] = 0;
     }

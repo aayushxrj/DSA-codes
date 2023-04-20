@@ -22,7 +22,7 @@ int partition(int *A,int low, int high){
 
 void quickSort(int *A, int low, int high){
     if(low < high){
-        int pivot = partition(A,low high);
+        int pivot = partition(A,low, high);
         quickSort(A,low,pivot-1);
         quickSort(A,pivot+1,high);
     }

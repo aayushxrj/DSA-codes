@@ -65,6 +65,20 @@ void MergeSort(int *A, int l, int h){
 }
 
 //iterative method
+void MergeSort(int *A, int size) {
+    int i, j, k;
+    int n = size;
+    int curr_size;
+
+    for (curr_size = 1; curr_size < n; curr_size *= 2) {
+        for (i = 0; i < n - 1; i += 2 * curr_size) {
+            int mid = i + curr_size - 1;
+            int h = (i + 2 * curr_size - 1 < n - 1) ? i + 2 * curr_size - 1 : n - 1;
+
+            Merge(A, i, mid, h);
+        }
+    }
+}
 
 
 int main(){
