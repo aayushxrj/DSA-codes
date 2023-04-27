@@ -13,8 +13,9 @@ struct Stack{
 struct Stack *createStack(){
     struct Stack *stk = (struct Stack*)malloc(sizeof(struct Stack));
     stk->top = NULL;
+    printf("Stack created!\n");
     return stk;
-};
+}
 
 int isEmpty(struct Stack *stk){
     if(stk->top == NULL){
@@ -25,23 +26,10 @@ int isEmpty(struct Stack *stk){
     }
 }
 
-//error
-int isFull(struct Node *stk){
-    struct Node *n = (struct Node*) malloc(sizeof(struct Node));
-    if(n == NULL){
-        return 1;
-    }
-    else{
-        free(n);
-        return 0;
-    }
-}
-
 void push(struct Stack *stk, int data){
     struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
-    if(isFull(stk)){
-        printf("Stack oveflow\n");
-        return -1;
+    if(temp == NULL){
+        printf("Stack overflow.\n");
     }
     else{
         temp->data = data;
@@ -52,7 +40,7 @@ void push(struct Stack *stk, int data){
 
 int pop(struct Stack *stk){
     if(isEmpty(stk)){
-        printf("Stack undeflow\n");
+        printf("Stack underflow.\n");
         return -1;
     }
     else{
@@ -60,13 +48,14 @@ int pop(struct Stack *stk){
         int data = temp->data;
         stk->top = stk->top->next;
         free(temp);
+        temp = NULL;
         return data;
     }
 }
 
 int peek(struct Stack *stk){
     if(isEmpty(stk)){
-        printf("Stack is empty\n");
+        printf("Stack is empty.\n");
         return -1;
     }
     else{
@@ -74,13 +63,42 @@ int peek(struct Stack *stk){
     }
 }
 
-int size(){}
+int size(struct Stack *stk){
+    int count = 0;
+    if(isEmpty(stk)){
+        return 0;
+    }
+    struct Node *temp = stk->top;
+    while(temp){
+        temp= temp->next;
+        count++;
+    }
+    return count;
+}
 
-void display(){}
+void display(struct Stack *stk){
+    struct Node *temp = stk->top;
+    printf("Stack contents from top: ");
+    while(temp){
+        printf("%d\t",temp->data);
+        temp = temp->next;
+    }
+}
 
 int main(){
-    // STACK named stk is created
     struct Stack *stk = createStack();
-
+    push(stk,10);
+    push(stk,20);
+    push(stk,30);
+    push(stk,40);
+    display(stk);
+    printf("\n");
+    printf("%d\n",size(stk));
+    printf("\nPopped : %d",pop(stk));
+    printf("\nPopped : %d",pop(stk));
+    printf("\nPopped : %d",pop(stk));
+    printf("\n");
+    printf("%d\n",size(stk));
+    display(stk);
     return 0;
 }

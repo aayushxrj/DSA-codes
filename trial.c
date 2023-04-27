@@ -184,35 +184,242 @@
 //    }
 // }
 
+// #include<stdio.h>
+
+// int main(){
+//     int t;
+//     scanf("%s",&t);
+//     while(t--){
+//         int n;
+//         scanf("%d",&n);
+//         int arr1[n], arr2[n];
+//         for(int i =0;i<n;i++){
+//             scanf("%d",&arr1[i]);
+//         }
+//         for(int i =0;i<n;i++){
+//             scanf("%d",&arr2[i]);
+//         }
+//         int l = 0, h= 0;
+//         for(int i=0; i<n;i++){
+//             if(arr1[i] != arr2[i]){
+//                 l = i;
+//                 break;
+//             }            
+//         }
+//         for(int i=n-1; i>=0;i--){
+//             if(arr1[i] != arr2[i]){
+//                 h=i;
+//                 break;
+//             }            
+//         }
+//         printf("%d %d",l,h+1);
+//     }
+//     return 0;
+// }
+
+// #include<stdio.h>
+// #include<stdlib.h>
+
+// struct Node{
+//     int data;
+//     struct Node *next;
+// };
+
+// struct Stack{
+//     struct Node *top;
+// };
+
+// struct Stack *createStack(){
+//     struct Stack *stk = (struct Stack*)malloc(sizeof(struct Stack));
+//     stk->top = NULL;
+//     printf("Stack created!\n");
+//     return stk;
+// }
+
+// int isEmpty(struct Stack *stk){
+//     if(stk->top == NULL){
+//         return 1;
+//     }
+//     else{
+//         return 0;
+//     }
+// }
+
+// void push(struct Stack *stk, int data){
+//     struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
+//     if(temp == NULL){
+//         printf("Stack overflow.\n");
+//     }
+//     else{
+//         temp->data = data;
+//         temp->next = stk->top;
+//         stk->top = temp;
+//     }
+// }
+
+// int pop(struct Stack *stk){
+//     if(isEmpty(stk)){
+//         printf("Stack underflow.\n");
+//         return -1;
+//     }
+//     else{
+//         struct Node *temp = stk->top;
+//         int data = temp->data;
+//         stk->top = stk->top->next;
+//         free(temp);
+//         temp = NULL;
+//         return data;
+//     }
+// }
+
+// int peek(struct Stack *stk){
+//     if(isEmpty(stk)){
+//         printf("Stack is empty.\n");
+//         return -1;
+//     }
+//     else{
+//         return stk->top->data;
+//     }
+// }
+
+// int size(struct Stack *stk){
+//     int count = 0;
+//     if(isEmpty(stk)){
+//         return 0;
+//     }
+//     struct Node *temp = stk->top;
+//     while(temp){
+//         temp= temp->next;
+//         count++;
+//     }
+//     return count;
+// }
+
+// void display(struct Stack *stk){
+//     struct Node *temp = stk->top;
+//     printf("Stack contents from top: ");
+//     while(temp){
+//         printf("%d\t",temp->data);
+//         temp = temp->next;
+//     }
+// }
+
+// int main(){
+//     struct Stack *stk = createStack();
+//     push(stk,10);
+//     push(stk,20);
+//     push(stk,30);
+//     push(stk,40);
+//     display(stk);
+//     printf("\nPopped : %d",pop(stk));
+//     printf("\nPopped : %d",pop(stk));
+//     printf("\nPopped : %d",pop(stk));
+//     printf("\n");
+//     display(stk);
+//     return 0;
+// }
+
 #include<stdio.h>
+#include<stdlib.h>
+
+struct Node{
+    int data;
+    struct Node *next;
+};
+
+struct Queue{
+    struct Node *front;
+    struct Node *rear;
+};
+
+struct Queue *createQueue(){
+    struct Queue *Q = (struct Queue*)malloc(sizeof(struct Queue));
+    Q->front = Q->rear = NULL;
+    printf("Queue created!\n");
+    return Q; 
+}
+
+int isEmpty(struct Queue *Q){
+    if(Q->front == NULL){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+void enqueue(struct Queue *Q, int data){
+    struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
+    if(temp == NULL){
+        printf("Queue full.\n");
+    }
+    else{
+        temp->data = data;
+        temp->next = NULL;
+        if(isEmpty(Q)){
+            Q->front = Q->rear = temp;
+        }
+        else{
+            Q->rear->next = temp;
+            Q->rear = temp;        }
+    }
+}
+
+int dequeue(struct Queue *Q){
+    if(isEmpty(Q)){
+        printf("Queue is already empty.\n");
+        return -1;
+    }
+    else{
+        struct Node *temp = Q->front;
+        int data = temp->data;
+        Q->front = Q->front->next;
+        free(temp);
+        temp = NULL;
+        return data;
+
+    }
+}
+
+int size(struct Queue *Q){
+    if(isEmpty(Q)){
+        return 0;
+    }
+    int count = 0;
+    struct Node *temp = Q->front;
+    while(temp){
+        count++;
+        temp = temp->next;
+    }
+    return count;
+}
+
+void display(struct Queue *Q){
+    struct Node *temp = Q->front;
+    printf("Stack from front : ");
+    while(temp){
+        printf("%d\t", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
 
 int main(){
-    int t;
-    scanf("%s",&t);
-    while(t--){
-        int n;
-        scanf("%d",&n);
-        int arr1[n], arr2[n];
-        for(int i =0;i<n;i++){
-            scanf("%d",&arr1[i]);
-        }
-        for(int i =0;i<n;i++){
-            scanf("%d",&arr2[i]);
-        }
-        int l = 0, h= 0;
-        for(int i=0; i<n;i++){
-            if(arr1[i] != arr2[i]){
-                l = i;
-                break;
-            }            
-        }
-        for(int i=n-1; i>=0;i--){
-            if(arr1[i] != arr2[i]){
-                h=i;
-                break;
-            }            
-        }
-        printf("%d %d",l,h+1);
-    }
+    struct Queue *Q = createQueue();
+    enqueue(Q,10);
+    enqueue(Q,20);
+    enqueue(Q,30);
+    enqueue(Q,40);
+    printf("Size is : %d", size(Q));
+    printf("\n");
+    display(Q);
+    printf("Dequeued element : %d",dequeue(Q));
+    printf("\nDequeued element : %d",dequeue(Q));
+    printf("\nDequeued element : %d",dequeue(Q));
+    printf("\nSize is : %d", size(Q));
+    printf("\n");
+    display(Q);
+    
     return 0;
 }
