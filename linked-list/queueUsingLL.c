@@ -40,7 +40,8 @@ void enqueue(struct Queue *Q, int data){
         }
         else{
             Q->rear->next = temp;
-            Q->rear = temp;        }
+            Q->rear = temp;        
+        }
     }
 }
 

@@ -32,7 +32,7 @@ void quickSort(int *A, int low, int high){
 int main(){
     int arr[] = { 5, 3, 8, 4, 2 ,12, 20,0, 10 };
     int size = sizeof(arr) / sizeof(int);
-    quickSort(arr, size);
+    quickSort(arr, size); 
     //displaying sorted array
     for(int i =0; i<size;i++){
         printf("%d\t", arr[i]);

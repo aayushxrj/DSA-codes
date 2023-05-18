@@ -1,0 +1,12 @@
+Write a program that that takesinput of N unique integers in the range 1 - 100. The program
+should substitute each integer with the greatest smaller integer on its left or 0 if there are no
+smaller integer. You need to use a BST for performing the above-mentioned procedure.
+
+
+Sample Input: 25, 32, 40, 19, 60, 55, 22
+Sample Output: 0, 25, 32, 0, 40, 40, 19
+
+
+25 32 40 19 60 55 22
+29 67 99 91 78 59 34 79 21 19
+12 57 89 24 78 19 46 9 37 11
