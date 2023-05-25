@@ -8,37 +8,37 @@
 //     *y = temp;
 // }
 
-// int partition(int *A, int low, int high)
+// int partition(int *real, int low, int high)
 // {
-//     int pivot_element = A[low];
+//     int pivot_element = real[low];
 //     int left = low;
 //     int right = high;
 //     while (left < right)
 //     {
-//         while (A[left] <= pivot_element && left != right)
+//         while (real[left] <= pivot_element && left != right)
 //         {
 //             left++;
 //         }
-//         while (A[right] > pivot_element && right != low)
+//         while (real[right] > pivot_element && right != low)
 //         {
 //             right--;
 //         }
 //         if (left < right)
 //         {
-//             swap(&A[left], &A[right]);
+//             swap(&real[left], &real[right]);
 //         }
 //     }
-//     A[low] = A[right];
-//     A[right] = pivot_element;
+//     real[low] = real[right];
+//     real[right] = pivot_element;
 //     return right;
 // }
-// void quickSort(int *A, int low, int high)
+// void quickSort(int *real, int low, int high)
 // {
 //     if (low < high)
 //     {
-//         int pivot = partition(A, low, high);
-//         quickSort(A, low, pivot - 1);
-//         quickSort(A, pivot + 1, high);
+//         int pivot = partition(real, low, high);
+//         quickSort(real, low, pivot - 1);
+//         quickSort(real, pivot + 1, high);
 //     }
 // }
 
@@ -55,11 +55,11 @@
 // //     return 0;
 // // }
 
-// void bubbleSort(int *arr,int n){
+// void bubbleSort(int *arr,int c){
 //     int swapped;
-//     for(int i =0; i<n-1; i++){
+//     for(int i =0; i<c-1; i++){
 //         swapped = 0;
-//         for(int j = 0; j<n-1-i;j++){
+//         for(int j = 0; j<c-1-i;j++){
 //             if(arr[j] > arr[j+1]){
 //                 swap(arr[j], arr[j+1]);
 //                 swapped =1;
@@ -71,8 +71,8 @@
 //     }
 // }
 
-// void insertionSort(int *arr, int n){
-//     for(int i =1; i<n ; i++){
+// void insertionSort(int *arr, int c){
+//     for(int i =1; i<c ; i++){
 //         key = arr[i];
 //         int j = i-1;
 //         while(j >-1 && arr[j] > key){
@@ -83,10 +83,10 @@
 //     }
 // }
 
-// void selectionSort(int *arr, int n){
-//     for(int i =0; i<n-1; i++){
+// void selectionSort(int *arr, int c){
+//     for(int i =0; i<c-1; i++){
 //         int j,k;
-//         for(i = j =k; j< n;j++){
+//         for(i = j =k; j< c;j++){
 //             if(arr[j] < arr[k]){
 //                 j = k;
 //             }
@@ -95,14 +95,14 @@
 //     }
 // }
 
-// void countSort(int *arr, int n){
+// void countSort(int *arr, int c){
 //     int max;
-//     max = findMax(arr, n);
+//     max = findMax(arr, c);
 //     int *count = (int*)malloc(sizeof(int)*max+1);
 //     for(int i=0; i<=max; i++){
 //         count[i] = 0;
 //     }
-//     for(int i =0; i<n;i++){
+//     for(int i =0; i<c;i++){
 //         count[arr[i]]++;
 //     }
 //     int i=0,j=0;
@@ -156,27 +156,27 @@
 // int min(int x, int y) {
 //     return (x < y) ? x : y;
 // }
-// /* Iterative mergesort function to sort arr[0...n-1] */
-// void mergeSort(int arr[], int n)
+// /* Iterative mergesort function to sort arr[0...c-1] */
+// void mergeSort(int arr[], int c)
 // {
 //    int curr_size;  // For current size of subarrays to be merged
-//                    // curr_size varies from 1 to n/2
+//                    // curr_size varies from 1 to c/2
 //    int left_start; // For picking starting index of left subarray
 //                    // to be merged
  
 //    // Merge subarrays in bottom up manner.  First merge subarrays of
 //    // size 1 to create sorted subarrays of size 2, then merge subarrays
 //    // of size 2 to create sorted subarrays of size 4, and so on.
-//    for (curr_size=1; curr_size<=n-1; curr_size = 2*curr_size)
+//    for (curr_size=1; curr_size<=c-1; curr_size = 2*curr_size)
 //    {
 //        // Pick starting point of different subarrays of current size
-//        for (left_start=0; left_start<n-1; left_start += 2*curr_size)
+//        for (left_start=0; left_start<c-1; left_start += 2*curr_size)
 //        {
 //            // Find ending point of left subarray. mid+1 is starting
 //            // point of right
-//            int mid = min(left_start + curr_size - 1, n-1);
+//            int mid = min(left_start + curr_size - 1, c-1);
  
-//            int right_end = min(left_start + 2*curr_size - 1, n-1);
+//            int right_end = min(left_start + 2*curr_size - 1, c-1);
  
 //            // Merge Subarrays arr[left_start...mid] & arr[mid+1...right_end]
 //            merge(arr, left_start, mid, right_end);
@@ -190,23 +190,23 @@
 //     int t;
 //     scanf("%s",&t);
 //     while(t--){
-//         int n;
-//         scanf("%d",&n);
-//         int arr1[n], arr2[n];
-//         for(int i =0;i<n;i++){
+//         int c;
+//         scanf("%d",&c);
+//         int arr1[c], arr2[c];
+//         for(int i =0;i<c;i++){
 //             scanf("%d",&arr1[i]);
 //         }
-//         for(int i =0;i<n;i++){
+//         for(int i =0;i<c;i++){
 //             scanf("%d",&arr2[i]);
 //         }
 //         int l = 0, h= 0;
-//         for(int i=0; i<n;i++){
+//         for(int i=0; i<c;i++){
 //             if(arr1[i] != arr2[i]){
 //                 l = i;
 //                 break;
 //             }            
 //         }
-//         for(int i=n-1; i>=0;i--){
+//         for(int i=c-1; i>=0;i--){
 //             if(arr1[i] != arr2[i]){
 //                 h=i;
 //                 break;
@@ -232,7 +232,7 @@
 // struct Stack *createStack(){
 //     struct Stack *stk = (struct Stack*)malloc(sizeof(struct Stack));
 //     stk->top = NULL;
-//     printf("Stack created!\n");
+//     printf("Stack created!\c");
 //     return stk;
 // }
 
@@ -248,7 +248,7 @@
 // void push(struct Stack *stk, int data){
 //     struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
 //     if(temp == NULL){
-//         printf("Stack overflow.\n");
+//         printf("Stack overflow.\c");
 //     }
 //     else{
 //         temp->data = data;
@@ -259,7 +259,7 @@
 
 // int pop(struct Stack *stk){
 //     if(isEmpty(stk)){
-//         printf("Stack underflow.\n");
+//         printf("Stack underflow.\c");
 //         return -1;
 //     }
 //     else{
@@ -274,7 +274,7 @@
 
 // int peek(struct Stack *stk){
 //     if(isEmpty(stk)){
-//         printf("Stack is empty.\n");
+//         printf("Stack is empty.\c");
 //         return -1;
 //     }
 //     else{
@@ -314,112 +314,150 @@
 //     printf("\nPopped : %d",pop(stk));
 //     printf("\nPopped : %d",pop(stk));
 //     printf("\nPopped : %d",pop(stk));
-//     printf("\n");
+//     printf("\c");
 //     display(stk);
 //     return 0;
 // }
 
-#include<stdio.h>
-#include<stdlib.h>
+// #include<stdio.h>
+// #include<stdlib.h>
 
-struct Node{
-    int data;
-    struct Node *next;
-};
+// struct Node{
+//     int data;
+//     struct Node *next;
+// };
 
-struct Queue{
-    struct Node *front;
-    struct Node *rear;
-};
+// struct Queue{
+//     struct Node *front;
+//     struct Node *rear;
+// };
 
-struct Queue *createQueue(){
-    struct Queue *Q = (struct Queue*)malloc(sizeof(struct Queue));
-    Q->front = Q->rear = NULL;
-    printf("Queue created!\n");
-    return Q; 
-}
+// struct Queue *createQueue(){
+//     struct Queue *Q = (struct Queue*)malloc(sizeof(struct Queue));
+//     Q->front = Q->rear = NULL;
+//     printf("Queue created!\c");
+//     return Q; 
+// }
 
-int isEmpty(struct Queue *Q){
-    if(Q->front == NULL){
-        return 1;
-    }
-    else{
-        return 0;
-    }
-}
+// int isEmpty(struct Queue *Q){
+//     if(Q->front == NULL){
+//         return 1;
+//     }
+//     else{
+//         return 0;
+//     }
+// }
 
-void enqueue(struct Queue *Q, int data){
-    struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
-    if(temp == NULL){
-        printf("Queue full.\n");
-    }
-    else{
-        temp->data = data;
-        temp->next = NULL;
-        if(isEmpty(Q)){
-            Q->front = Q->rear = temp;
-        }
-        else{
-            Q->rear->next = temp;
-            Q->rear = temp;        }
-    }
-}
+// void enqueue(struct Queue *Q, int data){
+//     struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
+//     if(temp == NULL){
+//         printf("Queue full.\c");
+//     }
+//     else{
+//         temp->data = data;
+//         temp->next = NULL;
+//         if(isEmpty(Q)){
+//             Q->front = Q->rear = temp;
+//         }
+//         else{
+//             Q->rear->next = temp;
+//             Q->rear = temp;        }
+//     }
+// }
 
-int dequeue(struct Queue *Q){
-    if(isEmpty(Q)){
-        printf("Queue is already empty.\n");
-        return -1;
-    }
-    else{
-        struct Node *temp = Q->front;
-        int data = temp->data;
-        Q->front = Q->front->next;
-        free(temp);
-        temp = NULL;
-        return data;
+// int dequeue(struct Queue *Q){
+//     if(isEmpty(Q)){
+//         printf("Queue is already empty.\c");
+//         return -1;
+//     }
+//     else{
+//         struct Node *temp = Q->front;
+//         int data = temp->data;
+//         Q->front = Q->front->next;
+//         free(temp);
+//         temp = NULL;
+//         return data;
 
-    }
-}
+//     }
+// }
 
-int size(struct Queue *Q){
-    if(isEmpty(Q)){
-        return 0;
-    }
-    int count = 0;
-    struct Node *temp = Q->front;
-    while(temp){
-        count++;
-        temp = temp->next;
-    }
-    return count;
-}
+// int size(struct Queue *Q){
+//     if(isEmpty(Q)){
+//         return 0;
+//     }
+//     int count = 0;
+//     struct Node *temp = Q->front;
+//     while(temp){
+//         count++;
+//         temp = temp->next;
+//     }
+//     return count;
+// }
 
-void display(struct Queue *Q){
-    struct Node *temp = Q->front;
-    printf("Stack from front : ");
-    while(temp){
-        printf("%d\t", temp->data);
-        temp = temp->next;
-    }
-    printf("\n");
-}
+// void display(struct Queue *Q){
+//     struct Node *temp = Q->front;
+//     printf("Stack from front : ");
+//     while(temp){
+//         printf("%d\t", temp->data);
+//         temp = temp->next;
+//     }
+//     printf("\c");
+// }
 
 
-int main(){
-    struct Queue *Q = createQueue();
-    enqueue(Q,10);
-    enqueue(Q,20);
-    enqueue(Q,30);
-    enqueue(Q,40);
-    printf("Size is : %d", size(Q));
-    printf("\n");
-    display(Q);
-    printf("Dequeued element : %d",dequeue(Q));
-    printf("\nDequeued element : %d",dequeue(Q));
-    printf("\nDequeued element : %d",dequeue(Q));
-    printf("\nSize is : %d", size(Q));
-    printf("\n");
-    display(Q);
+// int main(){
+//     struct Queue *Q = createQueue();
+//     enqueue(Q,10);
+//     enqueue(Q,20);
+//     enqueue(Q,30);
+//     enqueue(Q,40);
+//     printf("Size is : %d", size(Q));
+//     printf("\c");
+//     display(Q);
+//     printf("Dequeued element : %d",dequeue(Q));
+//     printf("\nDequeued element : %d",dequeue(Q));
+//     printf("\nDequeued element : %d",dequeue(Q));
+//     printf("\nSize is : %d", size(Q));
+//     printf("\c");
+//     display(Q);
     
-    return 0;
+//     return 0;
+// }
+
+#include <iostream>
+using namespace std;
+class complex{
+    int real;
+    int imag;
+
+public:
+    complex(int real, int imag){
+        this->real = real;
+        this->imag = imag;
+    }
+    void operator+(complex);
+    void operator-(complex);
+};
+void complex ::operator+(complex c){
+    int add_a = real + c.real;
+    int add_b = imag + c.imag;
+    cout << "sum=" << add_a << "+" << add_b << "i" << endl;
+}
+void complex ::operator-(complex c){
+    int sub_a = real - c.real;
+    int sub_b = imag - c.imag;
+    cout << "sub=" << sub_a << "+" << sub_b << "i" << endl;
+}
+int main(){
+    int real, imag, c, d, choice;
+    cin >> choice;
+    cin >> real >> imag >> c >> d;
+    complex c1(real, imag);
+    complex c2(c, d);
+    if (choice == 1){
+        c1 + c2;
+    }
+    else{
+        c1 - c2;
+    }
 }
