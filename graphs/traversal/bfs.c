@@ -68,10 +68,10 @@ void display(struct queue *ptr) {
 void bfs(int V,int arr[V][V]){
     struct queue *q = createQueue(V);
 
-    int i = 0;
     int visited[V];
     memset(visited, 0, sizeof(visited));
-
+    
+    int i = 0;
     printf("%d", i);
     visited[i] = 1;
     enqueue(q,i); // enqueuing i for exploration

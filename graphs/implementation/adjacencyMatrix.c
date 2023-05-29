@@ -20,7 +20,7 @@ struct graph{
 
 void insertEdge(struct graph *G, struct edge E){
 
-    //code 
+    //code      
 
 }
 
