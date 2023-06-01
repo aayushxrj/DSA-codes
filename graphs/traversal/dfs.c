@@ -113,7 +113,7 @@ void dfs(int V, int arr[][V]) {
     int visited[V];
     memset(visited, 0, sizeof(visited));
 
-    int i = 0;
+    int i = 1;
     printf("%d", i);
     visited[i] = 1;
     push(S, i);
