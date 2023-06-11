@@ -2,11 +2,6 @@
 #include<stdlib.h>
 #include<assert.h>
 
-struct Node{
-    int vertex;
-    struct Node *next;
-};
-
 struct edge{
     int source;
     int destination;
@@ -15,51 +10,71 @@ struct edge{
 struct graph{
     int V;
     int E;
-    struct Node *adjList[];      // adjacency list
+    int **adjMatrix;      // adjacency matrix
 };
 
-void insertEdge(struct graph *G, struct edge E){
-
-    //code      
-
-}
-
-struct graph* createGraph(const int numVertices){
+struct graph* createGraph(const int numVertices) {
     assert(numVertices >= 0);
-    struct graph *G = (struct graph*)malloc(sizeof(struct graph));
+    struct graph* G = (struct graph*)malloc(sizeof(struct graph));
 
     assert(G != NULL);
     G->V = numVertices;
     G->E = 0;
 
-    //code 
+    G->adjMatrix = (int**)malloc(numVertices * sizeof(int*));
+    for (int i = 0; i < numVertices; i++) {
+        G->adjMatrix[i] = (int*)calloc(numVertices, sizeof(int));
+    }
 
     return G;
-};
+}
 
-struct edge newEdge(int x, int y){
-    struct edge E;
-    E.source = x;
-    E.destination = y;
-    return E;
-};
+// void insertEdge(struct graph *G, struct edge E){
+
+//     //code
+//     int v,x,y;
+//     v = G->V;
+//     x = E.source;
+//     y = E.destination;
+//     if(x >= v || y>= v){
+//         printf("Invalid edge\n");
+//     }      
+//     else{
+//         G->adjMatrix[x][y] = 1;
+//         G->adjMatrix[y][x] = 1;
+//         (G->E)++;
+//     }
+// }
+
+// struct edge newEdge(int x, int y){
+//     struct edge E;
+//     E.source = x;
+//     E.destination = y;
+//     return E;
+// };
 
 void displayGraph(struct graph *G){
     //code
+    int V = G->V;
+    printf("%d Vertices, %d Edges\n", G->V, G->E);
+    for(int i =0; i<V; i++){
+        for(int j = 0; j<V; j++){
+            printf("%d ", G->adjMatrix[i][j]);
+        }
+        printf("\n");
+    }
 }
 
 int main(){
-    struct graph *G = createGraph(4);
-    struct edge e1 = newEdge(0,1);
-    struct edge e2 = newEdge(0,3);
-    struct edge e3 = newEdge(1,2);
-    struct edge e4 = newEdge(2,0);
-    struct edge e5 = newEdge(2,3);
-    insertEdge(G,e1);
-    insertEdge(G,e2);
-    insertEdge(G,e3);
-    insertEdge(G,e4);
-    insertEdge(G,e5);
-    displayGraph(G);
+    int V;
+    scanf("%d", &V);
+    struct graph *G = createGraph(V);
+    for(int i = 0; i<V; i++){
+        for(int j = 0; j<V; j++){
+            scanf("%d", &G->adjMatrix[i][j]);
+        }
+    }
+
+
     return 0;
 }
