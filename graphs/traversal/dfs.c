@@ -88,22 +88,22 @@ void display(struct stack *ptr){
 //     };
 // int visited[V];
  
-// void dfs(int i){
-//     int j;
-//     printf("%d ", i);
-//     visited[i] = 1;
-//     for(int j =0; j<V; j++){
-//         if(adjMat[i][j] == 1 && visited[j] == 0){
-//             dfs(j);
-//         }
-//     }
-// }
+void dfs(int i){
+    int j;
+    printf("%d ", i);
+    visited[i] = 1;
+    for(int j =0; j<V; j++){
+        if(adjMat[i][j] == 1 && visited[j] == 0){
+            dfs(j);
+        }
+    }
+}
 
-// int main() {
-//     memset(visited, 0, sizeof(visited));
-//     dfs(1);
-//     return 0;
-// }
+int main() {
+    memset(visited, 0, sizeof(visited));
+    dfs(1);
+    return 0;
+}
 
 
 

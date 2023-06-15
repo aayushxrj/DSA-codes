@@ -1,5 +1,11 @@
+// reversing a linked list
+// finding cycle
+// find size
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+
 
 struct Node
 {
@@ -7,22 +13,55 @@ struct Node
     struct Node *next;
 };
 
-void linkedListTraversal(struct Node *ptr)
+
+void traversal(struct Node *head)
 {
-    while (ptr != NULL)
+    while (head)
     {
-        printf("Element : %d\n", ptr->data);
-        ptr = ptr->next;
+        printf("%d ", head->data);
+        head = head->next;
     }
 }
 
+
 struct Node *insertAtFirst(struct Node *head, int data)
 {
-    struct Node *ptr = (struct Node *)malloc(sizeof(struct Node));
-    ptr->next = head;
-    ptr->data = data;
-    return ptr;
+    struct Node *temp = (struct Node *)malloc(sizeof(struct Node));
+    temp->next = head;
+    temp->data = data;
+    return temp;
 }
+
+
+bool hasCycle(struct Node *head){
+    struct Node *slow = head;
+    struct Node *fast = head;
+    while(slow!=NULL && fast!=NULL && fast->next !=NULL){
+        slow = slow->next;
+        fast = fast->next->next;
+        if(slow == fast){
+            return true;
+        }
+    }
+    return false;
+}
+
+
+struct Node *revLL(struct Node *head){
+    struct Node *p = head;
+    struct Node *q = NULL;
+    struct Node *r = NULL;
+
+    while(p!=NULL){
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    head = q;
+    return head;
+}
+
 
 struct Node *insertAtEnd(struct Node *head, int data)
 {
@@ -123,36 +162,31 @@ struct Node *deleteAtValue(struct Node *head, int value)
 
 int main()
 {
+    int arr[] = {10, 20, 30, 40, 50};
     struct Node *head = (struct Node *)malloc(sizeof(struct Node));
-    struct Node *second = (struct Node *)malloc(sizeof(struct Node));
-    struct Node *third = (struct Node *)malloc(sizeof(struct Node));
-    struct Node *fourth = (struct Node *)malloc(sizeof(struct Node));
-
-    // link first and second
-    head->data = 4;
-    head->next = second;
-
-    // link second and third
-    second->data = 3;
-    second->next = third;
-
-    // link third and fourth
-    third->data = 8;
-    third->next = fourth;
-
-    // terminating the list
-    fourth->data = 1;
-    fourth->next = NULL;
-
-    linkedListTraversal(head);
+    head->data = arr[0];
+    struct Node *temp = head;
+    for (int i = 1; i < 5; i++)
+    {
+        struct Node *next = (struct Node *)malloc(sizeof(struct Node));
+        next->data = arr[i];
+        temp->next = next;
+        temp = next;
+    }
+    temp->next = NULL;
+    traversal(head);
     printf("\n");
-    // head = insertAtFirst(head, 56);
-    // head = insertAtIndex(head,69,2);
-    // linkedListTraversal(head);
+    if(hasCycle(head)){
+        printf("Yes\n");
+    }
+    else{
+        printf("No\n");
+    }
 
-    // head = deleteFirst(head);
-    head = deleteAtIndex(head, 2);
-    linkedListTraversal(head);
+    head = revLL(head);
+    traversal(head);
 
     return 0;
 }
+
+

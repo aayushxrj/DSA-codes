@@ -29,29 +29,29 @@ struct graph* createGraph(const int numVertices) {
     return G;
 }
 
-// void insertEdge(struct graph *G, struct edge E){
+void insertEdge(struct graph *G, struct edge E){
 
-//     //code
-//     int v,x,y;
-//     v = G->V;
-//     x = E.source;
-//     y = E.destination;
-//     if(x >= v || y>= v){
-//         printf("Invalid edge\n");
-//     }      
-//     else{
-//         G->adjMatrix[x][y] = 1;
-//         G->adjMatrix[y][x] = 1;
-//         (G->E)++;
-//     }
-// }
+    //code
+    int v,x,y;
+    v = G->V;
+    x = E.source;
+    y = E.destination;
+    if(x >= v || y>= v){
+        printf("Invalid edge\n");
+    }      
+    else{
+        G->adjMatrix[x][y] = 1;
+        G->adjMatrix[y][x] = 1;
+        (G->E)++;
+    }
+}
 
-// struct edge newEdge(int x, int y){
-//     struct edge E;
-//     E.source = x;
-//     E.destination = y;
-//     return E;
-// };
+struct edge newEdge(int x, int y){
+    struct edge E;
+    E.source = x;
+    E.destination = y;
+    return E;
+};
 
 void displayGraph(struct graph *G){
     //code
