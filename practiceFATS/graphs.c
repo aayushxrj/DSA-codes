@@ -24,11 +24,11 @@ struct graph* createGraph(int V){
     return G;
 }
 
-void insertEdge(struct graph *G, int x, int y, int weight){
+void createEdge(struct graph *G, int x, int y, int weight){
     int V = G->V;
-    struct edge e;
-    e.destination =x;
-    e.source = y;
+    // struct edge e;
+    // e.destination =x;
+    // e.source = y;
     G->adjmatrix[x][y] = weight;
     G->adjmatrix[y][x] = weight;
     G->E++;

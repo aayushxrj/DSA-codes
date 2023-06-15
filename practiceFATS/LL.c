@@ -190,3 +190,68 @@ int main()
 }
 
 
+// Function to reverse a linked list
+ListNode* reverseList(ListNode* head) {
+    ListNode* prev = nullptr;
+    ListNode* curr = head;
+
+    while (curr != nullptr) {
+        ListNode* next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+
+    return prev;
+}
+
+
+// Function to check if a singly linked list is a palindrome
+bool isPalindrome(ListNode* head) {
+    if (head == nullptr || head->next == nullptr)
+        return true;
+
+    // Find the middle of the linked list using slow and fast pointers
+    ListNode* slow = head;
+    ListNode* fast = head;
+    while (fast->next != nullptr && fast->next->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    // Reverse the second half of the linked list
+    ListNode* secondHalf = reverseList(slow->next);
+
+    // Compare the first half with the reversed second half
+    ListNode* firstHalf = head;
+    while (secondHalf != nullptr) {
+        if (firstHalf->val != secondHalf->val)
+            return false;
+        firstHalf = firstHalf->next;
+        secondHalf = secondHalf->next;
+    }
+
+    return true;
+}
+
+// Function to merge a linked list into another linked list at alternate positions
+void mergeLists(struct ListNode** list1, struct ListNode** list2) {
+    struct ListNode* curr1 = *list1;
+    struct ListNode* curr2 = *list2;
+    struct ListNode* next1;
+    struct ListNode* next2;
+
+    while (curr1 != NULL && curr2 != NULL) {
+        next1 = curr1->next;
+        next2 = curr2->next;
+
+        curr1->next = curr2;
+        curr2->next = next1;
+
+        curr1 = next1;
+        curr2 = next2;
+    }
+
+    *list2 = curr2;
+}
+mergeLists(&list1, &list2);
