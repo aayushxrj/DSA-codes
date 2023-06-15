@@ -167,9 +167,6 @@ void dfs(struct graph *G,int *visited,int start){
     }
 }
 
-int minDistance(){}
-void printSolution(){}
-void Dijkstra(){}
 
 int adjMat[7][7] = {
     {0,1,1,1,0,0,0},

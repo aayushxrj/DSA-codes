@@ -98,14 +98,15 @@ char *InToPost(struct stack *S, char *exp){
                 push(S,exp[i]);
             }
             else{
-                if(priority(S->arr[S->top]) > priority(exp[i])){
+                while(priority(S->arr[S->top]) > priority(exp[i])){
                     postfix[j] = pop(S);
                     j++;
-                    push(S,exp[i]);
+                    // push(S,exp[i]);
                 }
-                else{
-                    push(S,exp[i]);
-                }
+                // else{
+                //     push(S,exp[i]);
+                // }
+                push(S,exp[i]);
             }
         }
     }

@@ -23,7 +23,7 @@ int isFull(struct queue *ptr) {
 }
 
 int isEmpty(struct queue *ptr) {
-    if (ptr->f == -1 || ptr->f > ptr->r) { // Check if f is -1 or greater than r
+    if (ptr->f == -1 ) { // Check if f is -1 or greater than r
         return 1;
     } else {
         return 0;
